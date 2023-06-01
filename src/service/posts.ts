@@ -28,3 +28,9 @@ export async function getAllPosts(): Promise<Post[]> {
     .then<Post[]>((data) => JSON.parse(data)) // equivalent to .then(JSON.parse)
     .then((posts) => posts.sort((a, b) => (a.date > b.date ? -1 : 1)));
 }
+
+export type PostData = Post & { content: string };
+export async function getPostData(fileName: string): Promise<Post[]> {
+  return getAllPosts() //
+    .then((posts) => posts.filter((post) => post.featured));
+}
