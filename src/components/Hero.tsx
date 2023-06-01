@@ -6,7 +6,7 @@ export default function Hero() {
   return (
     <section className='text-center'>
       <Image
-        className='mx-auto rounded-full'
+        className='w-40 h-40 mx-auto overflow-hidden rounded-full'
         src={profileImage}
         alt='Picture of the author'
         width={250}
