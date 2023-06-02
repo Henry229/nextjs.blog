@@ -10,6 +10,8 @@ export type Post = {
   featured: boolean;
 };
 
+export type PostData = Post & { content: string };
+
 export async function getFeaturedPosts(): Promise<Post[]> {
   // const posts = await getAllPosts();
   // return posts.filter((post) => post.featured);
@@ -29,8 +31,12 @@ export async function getAllPosts(): Promise<Post[]> {
     .then((posts) => posts.sort((a, b) => (a.date > b.date ? -1 : 1)));
 }
 
-export type PostData = Post & { content: string };
-export async function getPostData(fileName: string): Promise<Post[]> {
-  return getAllPosts() //
-    .then((posts) => posts.filter((post) => post.featured));
+export async function getPostData(fileName: string): Promise<PostData> {
+  const filePath = path.join(process.cwd(), 'data', 'posts', `${fileName}.md`);
+  const metadata = await getAllPosts() //
+    .then((posts) => posts.find((post) => post.path === fileName));
+  if (!metadata) throw new Error('${fileName} cannot find');
+
+  const content = await readFile(filePath, 'utf-8');
+  return { ...metadata, content };
 }
