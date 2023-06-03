@@ -1,5 +1,7 @@
-import MarkdownView from '@/components/MarkdownView';
+import AdjacentPostCard from '@/components/AdjacentPostCard';
+import PostContent from '@/components/PostContent';
 import { getPostData } from '@/service/posts';
+import Image from 'next/image';
 
 type Props = {
   params: {
@@ -11,12 +13,24 @@ export default async function PostPage({ params: { slug } }: Props) {
   //1. 전달된 slug에 해당하는 포스트 데이터를 읽어와서
   //2. 데이터를 마크다운뷰어에 표기하면 됨
 
+  // const { title, description, date, path, content } = await getPostData(slug);
   const post = await getPostData(slug);
+  const { title, path, next, prev } = post;
 
   return (
-    <>
-      <h1>{post.title}</h1>
-      <MarkdownView content={post.content} />
-    </>
+    <article className='m-4 overflow-hidden bg-gray-100 shadow-lg rounded-2xl'>
+      <Image
+        className='w-full h-1/5 max-h-[500px]'
+        src={`/images/posts/${path}.png`}
+        alt={title}
+        width={760}
+        height={420}
+      />
+      <PostContent post={post} />
+      <section className='flex shadow-md'>
+        {prev && <AdjacentPostCard post={prev} type='prev' />}
+        {next && <AdjacentPostCard post={next} type='next' />}
+      </section>
+    </article>
   );
 }
