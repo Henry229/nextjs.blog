@@ -1,3 +1,4 @@
+import ContactForm from '@/components/ContactForm';
 import { AiFillGithub, AiFillLinkedin, AiFillYoutube } from 'react-icons/ai';
 
 const LINKS = [
@@ -8,16 +9,24 @@ const LINKS = [
 
 export default function ContactPage() {
   return (
-    <>
-      <h2>Contact Me</h2>
+    <section className='flex flex-col items-center'>
+      <h2 className='my-2 text-3xl font-bold'>Contact Me</h2>
       <p>chunhyungjoon@gmail.com</p>
-      <div>
+      <ul className='flex gap-4 my-2'>
         {LINKS.map((link, index) => (
-          <a key={index} href={link.url} target='_blank' rel='noreferrer'>
+          <a
+            key={index}
+            href={link.url}
+            target='_blank'
+            rel='noreferrer'
+            className='text-5xl hover:text-yellow-500'
+          >
             {link.icon}
           </a>
         ))}
-      </div>
-    </>
+      </ul>
+      <h2 className='my-8 text-3xl font-bold'>Or Send me an email</h2>
+      <ContactForm />
+    </section>
   );
 }
