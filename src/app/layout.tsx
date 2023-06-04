@@ -8,6 +8,9 @@ const sans = Open_Sans({ subsets: ['latin'] });
 export const metadata = {
   title: { default: "Henry's Blog", template: "Henry's Blog | %s" },
   description: "Henry's Blog | fullstack developer",
+  icons: {
+    icon: '/favicon.ico',
+  },
 };
 
 export default function RootLayout({

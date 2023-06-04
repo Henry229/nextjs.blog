@@ -1,4 +1,10 @@
 import Hero from '@/components/Hero';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'About Me',
+  description: 'see my career',
+};
 
 const TITLE_CLASS = 'my-2 text-2xl font-bold text-gray-800';
 
